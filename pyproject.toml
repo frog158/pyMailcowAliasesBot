@@ -9,6 +9,7 @@ packages = [{include = "tg_mailcow_aliases"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 requests = "^2.31.0"
+telebot = "^0.0.5"
 
 
 [tool.poetry.group.dev.dependencies]

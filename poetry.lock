@@ -383,6 +383,31 @@ files = [
 plugins = ["importlib-metadata"]
 
 [[package]]
+name = "pytelegrambotapi"
+version = "4.12.0"
+description = "Python Telegram bot api."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyTelegramBotAPI-4.12.0.tar.gz", hash = "sha256:11a482c8add3b8235aa1de4984f1e10df2fac38decac8676d0e5e070e7c3880e"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[package.extras]
+aiohttp = ["aiohttp"]
+aioredis = ["aioredis"]
+coloredlogs = ["coloredlogs"]
+fastapi = ["fastapi"]
+json = ["ujson"]
+pil = ["Pillow"]
+psutil = ["psutil"]
+redis = ["redis (>=3.4.1)"]
+uvicorn = ["uvicorn"]
+watchdog = ["watchdog"]
+
+[[package]]
 name = "pytest"
 version = "7.4.0"
 description = "pytest: simple powerful testing with Python"
@@ -471,6 +496,21 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
+name = "telebot"
+version = "0.0.5"
+description = "A Telegram bot library, with simple route decorators."
+optional = false
+python-versions = "*"
+files = [
+    {file = "telebot-0.0.5-py3-none-any.whl", hash = "sha256:50327c240243480d40ade4ea5bea4f464bf57d4ff000ea669fcd705396074863"},
+    {file = "telebot-0.0.5.tar.gz", hash = "sha256:848a5885b57247b65edd0e92647b4372ebd8d41611dca3f344788c11deac2571"},
+]
+
+[package.dependencies]
+pyTelegramBotAPI = "*"
+requests = "*"
+
+[[package]]
 name = "traitlets"
 version = "5.9.0"
 description = "Traitlets Python configuration system"
@@ -516,4 +556,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b395e2f343ebae9761513e25e3e52ae98a14b8b4e1fe54effe66e6372e03510a"
+content-hash = "2a736fd3938603954cd02d37579eca231de6129d7b88c6bdce261fd1f3548f02"
