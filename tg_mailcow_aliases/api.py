@@ -36,3 +36,17 @@ def add_alias(new_alias, goto=DEFAULT_EMAIL, domain=DEFAULT_DOMAIN, active=1):
     }
     re = requests.post(f"{SERVER_URL}{ADD_ALIAS}", json=add_alias_json, headers=HEADER)
     return (re.status_code, re.json())
+
+
+def delete_alias(alias_id):
+    """delete alias by id
+
+    Args:
+            alias_id: alias id
+
+    Returns:
+            Returns - tuple (status_code, request data)
+
+    """
+    re = requests.post(f"{SERVER_URL}{DELETE_ALIAS}", json=[alias_id], headers=HEADER)
+    return (re.status_code, re.json())
