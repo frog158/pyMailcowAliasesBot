@@ -23,3 +23,6 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "tg_mailcow_aliases.scripts.start:main"
+
+[tool.black]
+line-length = 80
