@@ -2,7 +2,7 @@ from tg_mailcow_aliases.bot import start_bot
 
 
 def main():
-    print("Hello world")
+    print("Start bot")
     start_bot()
 
 
