@@ -4,7 +4,8 @@ import logging
 from tg_mailcow_aliases.api import add_alias
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
 )
 
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "error")
@@ -67,7 +68,9 @@ def handle_message(message):
         alias = result[0]["log"][3]["address"]
         goto = result[0]["log"][3]["goto"]
         bot.reply_to(message, f"✅ Success!\nAddress {alias} goto {goto}")
-    else:  # Если не смогли то сообщаем об ошибке и выводим чего нам сервер присла
+    else:
+        # Если не смогли то сообщаем об ошибке
+        # и выводим то что нам сервер прислал
         msg = f"{result[0]['msg'][0]} {result[0]['msg'][1]}"
         bot.reply_to(message, f"🆘 Failed!\nTYPE = {result_type}\n{msg}")
 
