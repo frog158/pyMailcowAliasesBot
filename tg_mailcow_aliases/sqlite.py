@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_PATH = "/opt/project/user.db"
+DB_PATH = "/data/user.db"
 
 
 def create_tabel():
