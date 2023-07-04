@@ -25,7 +25,10 @@ def add_user(id, name, domain, goto):
         id: telegram user ID
         name: name or nickname
         domain: in which domain will create aliases
-        goto: email address for alias"""
+        goto: email address for alias
+        Return:
+                None
+    """
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute(
@@ -34,3 +37,19 @@ def add_user(id, name, domain, goto):
         VALUES (?,?,?,?)""",
         (id, name, domain, goto),
     )
+    conn.commit()
+    conn.close()
+
+
+def is_user_exist(id):
+    """check if  user in database
+
+    Args:
+            id (strin): telegram user id
+    """
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute("SELECT user_id FROM users WHERE user_id=?", (id,))
+    row = c.fetchone()
+    conn.close()
+    return row is not None
