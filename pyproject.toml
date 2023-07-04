@@ -23,6 +23,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 start = "tg_mailcow_aliases.scripts.start:main"
+create_table = "tg_mailcow_aliases.scripts.create_table:main"
+add_user = "tg_mailcow_aliases.scripts.add_user:main"
 
 [tool.black]
 line-length = 80
