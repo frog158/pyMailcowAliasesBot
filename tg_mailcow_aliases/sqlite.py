@@ -53,3 +53,23 @@ def is_user_exist(id):
     row = c.fetchone()
     conn.close()
     return row is not None
+
+
+def get_user(id):
+    """get user from database
+
+    Args:
+            id (string): telegram user id
+
+    Returns:
+            row: row or None
+    """
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute(
+        "SELECT user_id, user_name, domain, goto FROM users WHERE user_id=?",
+        (id,),
+    )
+    row = c.fetchone()
+    conn.close()
+    return row if row is not None else None
