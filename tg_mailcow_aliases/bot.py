@@ -10,9 +10,6 @@ logging.basicConfig(
 )
 
 TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "error")
-USER_ID = os.getenv("USER_ID", "error")
-
-logging.info(f"USER_ID = {USER_ID}")
 
 bot = telebot.TeleBot(TG_BOT_TOKEN)
 
@@ -20,11 +17,14 @@ bot = telebot.TeleBot(TG_BOT_TOKEN)
 @bot.message_handler(commands=["start", "help"])
 def start(message):
     user_id = message.from_user.id
+    # Если пользователя нет в базе то отлуп
     if not is_user_exist(user_id):
         bot.reply_to(message, "403 Forbidden")
         return
+    # если он есть, берем его данные и посылаем приветственное
+    # сообщение
     (_, name, domain, goto) = get_user(user_id)
-    logging.info(f"{name} {domain} {goto}")
+    logging.info(f"{user_id} {name} {domain} {goto}")
     bot.reply_to(message, f"Hi {name}, aliases for {domain} is goto {goto}")
 
 
@@ -58,13 +58,15 @@ def handle_message(message):
     # айди пользователя
     user_id = str(message.from_user.id)
     # Если пользователь не разрешен то отлуп
-    if user_id != USER_ID:
+    if not is_user_exist(user_id):
         bot.reply_to(message, "403 Forbidden")
         return
-    logging.info(f"User - {user_id}, URL - {alias}")
+    # получаем данные пользователя из базы
+    (_, name, domain, goto) = get_user(user_id)
+    logging.info(f"{user_id}, {name}  {alias}@{domain} goto {goto}")
     # создаем алиас. По умолчани можно передать только левую часть алиаса
     # там есть дефолтные значения
-    (status_code, result) = add_alias(alias)
+    (status_code, result) = add_alias(alias, goto, domain)
     # STATUS_CODE ответ сервера. Если не 200 значит что то не так в принципе
     # не связи или сервер не отвечает
     logging.info(f"STATUS_CODE = {status_code}")
