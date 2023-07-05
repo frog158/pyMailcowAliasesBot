@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tg-mailcow-aliases"
-version = "0.1.0"
+version = "0.1.1"
 description = "Bot for create aliases in mailcow."
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"

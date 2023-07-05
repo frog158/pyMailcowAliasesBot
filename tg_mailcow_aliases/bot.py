@@ -81,7 +81,11 @@ def handle_message(message):
     if result_type == "success":
         alias = result[0]["log"][3]["address"]
         goto = result[0]["log"][3]["goto"]
-        bot.reply_to(message, f"✅ Success!\nAddress {alias} goto {goto}")
+        bot.reply_to(
+            message,
+            f"✅ Success!\nAddress `{alias}` goto {goto}",
+            parse_mode="Markdown",
+        )
     else:
         # Если не смогли то сообщаем об ошибке
         # и выводим то что нам сервер прислал
