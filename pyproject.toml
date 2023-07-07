@@ -27,6 +27,7 @@ create_table = "tg_mailcow_aliases.scripts.create_table:main"
 add_user = "tg_mailcow_aliases.scripts.add_user:main"
 delete_user = "tg_mailcow_aliases.scripts.delete_user:main"
 is_user_exists = "tg_mailcow_aliases.scripts.is_user_exists:main"
+get_all_users = "tg_mailcow_aliases.scripts.get_all_users:main"
 
 [tool.black]
 line-length = 80
