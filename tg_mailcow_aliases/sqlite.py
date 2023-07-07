@@ -73,3 +73,19 @@ def get_user(id):
     row = c.fetchone()
     conn.close()
     return row if row is not None else None
+
+
+def delete_user(id):
+    """delete user from database
+
+    Args:
+        id (string): user id from telegram
+    """
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute(
+        "DELETE FROM users WHERE user_id=?",
+        (id,),
+    )
+    conn.commit()
+    conn.close()
