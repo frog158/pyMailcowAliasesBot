@@ -89,3 +89,18 @@ def delete_user(id):
     )
     conn.commit()
     conn.close()
+
+
+def get_all_users():
+    """get all users from database
+
+    Returns:
+        list: return list of tuples of all users
+    """
+    sql = "SELECT * FROM users"
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute(sql)
+    result = c.fetchall()
+    conn.close()
+    return result
