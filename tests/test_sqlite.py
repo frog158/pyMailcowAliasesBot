@@ -2,7 +2,13 @@ import pytest
 import sqlite3
 import os
 
-from tg_mailcow_aliases.sqlite import add_user, is_user_exist
+from tg_mailcow_aliases.sqlite import (
+    add_user,
+    is_user_exist,
+    get_user,
+    delete_user,
+    get_all_users,
+)
 
 DB_PATH = "/data/test_users.db"
 
@@ -90,3 +96,42 @@ def test_is_user_exists(setup_test_data):
     assert is_user_exist("123", DB_PATH)
     # False
     assert not is_user_exist("128", DB_PATH)
+
+
+def test_get_user(setup_test_data):
+    """
+    Получает данные пользователя из базы
+    Предусловия: База данных создана, добавлены тестовые данные
+    Ождаемые результаты:
+    ("123", "Opa Opa", "opa.com", "opa@opa.com")
+    None
+    """
+    user = get_user("123", DB_PATH)
+    assert user == ("123", "Opa Opa", "opa.com", "opa@opa.com")
+    user = get_user("112233", DB_PATH)
+    assert user is None
+
+
+def test_delete_user(setup_test_data):
+    """
+    Удаляет пользователя из базы данных
+    Предусловия: База данных создана, добавлены тестовые данные
+    Ожидаемые результаты: Пользователь удален из базы данных
+    """
+    assert is_user_exist("123", DB_PATH)
+    delete_user("123", DB_PATH)
+    assert not is_user_exist("123", DB_PATH)
+    assert is_user_exist("234", DB_PATH)
+    delete_user("234", DB_PATH)
+    assert not is_user_exist("234", DB_PATH)
+
+
+def test_get_all_users(setup_test_data):
+    """
+    Получает всех пользователей из базы данных
+    Предусловия: База данных создана, добавлены тестовые данные
+    Ожидаемые результаты: Список пользователей
+    """
+    assert get_all_users(DB_PATH) == [
+        (5, "123", "Opa Opa", "opa.com", "opa@opa.com")
+    ]
