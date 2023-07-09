@@ -2,7 +2,7 @@ import pytest
 import sqlite3
 import os
 
-from tg_mailcow_aliases.sqlite import add_user
+from tg_mailcow_aliases.sqlite import add_user, is_user_exist
 
 DB_PATH = "/data/test_users.db"
 
@@ -65,7 +65,7 @@ def test_add_user(setup_database):
     """
     Проверяет добавление пользователя в базу данных
     Предусловия: База данных пуста
-    Ожидаемые резулльтаты: Пользователь должен быть успешно добавлен
+    Ожидаемые результаты: Пользователь должен быть успешно добавлен
     в таблицу `users`
     """
     add_user("234", "xlopa xlopa", "bubu.com", "bubu@bubu.com", DB_PATH)
@@ -75,3 +75,18 @@ def test_add_user(setup_database):
     result = c.fetchone()
     conn.close()
     assert result[0] == 1
+
+
+def test_is_user_exists(setup_test_data):
+    """
+    Проверяет есть ли пользователь в таблице
+    Предусловия: База данных создана, добавлены тестовые данные
+    Ожидаемые результаты: True если пользователь есть
+    False если пользователя нет
+    """
+    # True
+    assert is_user_exist("234", DB_PATH)
+    # True
+    assert is_user_exist("123", DB_PATH)
+    # False
+    assert not is_user_exist("128", DB_PATH)
