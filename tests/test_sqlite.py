@@ -65,14 +65,14 @@ def test_create_table(setup_database):
     Предусловия: База данных пуста или отсутствует
     Ожидаемые результаты: Таблица `users` должна быть успешно создана
     """
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.cursor()
+    cursor.execute(
         """SELECT name FROM sqlite_master
         WHERE type='table' and name='users'"""
     )
-    result = c.fetchone()
-    conn.close()
+    result = cursor.fetchone()
+    connection.close()
     assert result == ("users",)
 
 
