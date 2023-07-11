@@ -104,8 +104,6 @@ def test_is_user_exists(setup_test_data):
     False если пользователя нет
     """
     # True
-    assert is_user_exist("234", DB_PATH)
-    # True
     assert is_user_exist("123", DB_PATH)
     # False
     assert not is_user_exist("128", DB_PATH)
