@@ -84,12 +84,12 @@ def test_add_user(setup_database):
     в таблицу `users`
     """
     add_user("234", "xlopa xlopa", "bubu.com", "bubu@bubu.com", DB_PATH)
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("SELECT COUNT(*) FROM users")
-    result = c.fetchone()
-    conn.close()
-    assert result[0] == 1
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM users")
+    result = cursor.fetchone()
+    connection.close()
+    assert result == (1,)
 
 
 def test_is_user_exists(setup_test_data):
