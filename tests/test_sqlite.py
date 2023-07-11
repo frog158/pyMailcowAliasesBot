@@ -73,7 +73,7 @@ def test_create_table(setup_database):
     )
     result = c.fetchone()
     conn.close()
-    assert result[0] == "users"
+    assert result == ("users",)
 
 
 def test_add_user(setup_database):
