@@ -81,14 +81,14 @@ def delete_user(id, db=DB_PATH):
     Args:
         id (string): user id from telegram
     """
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
+    cursor.execute(
         "DELETE FROM users WHERE user_id=?",
         (id,),
     )
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
 
 
 def get_all_users(db=DB_PATH):
