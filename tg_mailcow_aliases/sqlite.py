@@ -5,9 +5,9 @@ DB_PATH = "/data/user.db"
 
 def create_tabel(db=DB_PATH):
     """Create database and user table if does not exists"""
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
+    cursor.execute(
         """CREATE TABLE IF NOT EXISTS users
         (id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id TEXT,
@@ -15,8 +15,8 @@ def create_tabel(db=DB_PATH):
         domain TEXT,
         goto TEXT)"""
     )
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
 
 
 def add_user(id, name, domain, goto, db=DB_PATH):
