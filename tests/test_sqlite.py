@@ -49,6 +49,10 @@ def setup_test_data(setup_database):
     """
     connection = sqlite3.connect(DB_PATH)
     cursor = connection.cursor()
+    # Удаляем все данные из таблицы
+    cursor.execute("DELETE FROM users")
+
+    # Добавляем тестовые данные
     cursor.execute(
         """INSERT INTO users
         (user_id, user_name, domain, goto)
