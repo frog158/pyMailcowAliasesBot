@@ -47,11 +47,11 @@ def is_user_exist(id, db=DB_PATH):
     Args:
             id (strin): telegram user id
     """
-    connection`` = sqlite3.connect(db)
-    cursor = connection``.cursor()
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
     cursor.execute("SELECT user_id FROM users WHERE user_id=?", (id,))
-    row = c.fetchone()
-    connection``.close()
+    row = cursor.fetchone()
+    connection.close()
     return row is not None
 
 
