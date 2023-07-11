@@ -47,7 +47,16 @@ def setup_test_data(setup_database):
     Ожидаемые результаты: Тестовые данные будут успешно добавлены
     в таблицу `users`
     """
-    add_user("123", "Opa Opa", "opa.com", "opa@opa.com", DB_PATH)
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.cursor()
+    cursor.execute(
+        """INSERT INTO users
+        (user_id, user_name, domain, goto)
+        VALUES (?,?,?,?)""",
+        ("123", "Opa Opa", "opa.com", "opa@opa.com"),
+    )
+    connection.commit()
+    connection.close()
 
 
 def test_create_table(setup_database):
