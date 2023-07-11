@@ -29,16 +29,16 @@ def add_user(id, name, domain, goto, db=DB_PATH):
         Return:
                 None
     """
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
+    cursor.execute(
         """INSERT INTO users
         (user_id, user_name, domain, goto)
         VALUES (?,?,?,?)""",
         (id, name, domain, goto),
     )
-    conn.commit()
-    conn.close()
+    connection.commit()
+    connection.close()
 
 
 def is_user_exist(id, db=DB_PATH):
