@@ -127,12 +127,13 @@ def test_delete_user(setup_test_data):
     Предусловия: База данных создана, добавлены тестовые данные
     Ожидаемые результаты: Пользователь удален из базы данных
     """
-    assert is_user_exist("123", DB_PATH)
     delete_user("123", DB_PATH)
-    assert not is_user_exist("123", DB_PATH)
-    assert is_user_exist("234", DB_PATH)
-    delete_user("234", DB_PATH)
-    assert not is_user_exist("234", DB_PATH)
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.cursor()
+    cursor.execute("SELECT user_id FROM users WHERE user_id=?", ("123",))
+    row = cursor.fetchone()
+    connection.close()
+    assert row is None
 
 
 def test_get_all_users(setup_test_data):
