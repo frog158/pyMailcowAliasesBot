@@ -64,14 +64,14 @@ def get_user(id, db=DB_PATH):
     Returns:
             row: row or None
     """
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
+    cursor.execute(
         "SELECT user_id, user_name, domain, goto FROM users WHERE user_id=?",
         (id,),
     )
-    row = c.fetchone()
-    conn.close()
+    row = cursor.fetchone()
+    connection.close()
     return row if row is not None else None
 
 
