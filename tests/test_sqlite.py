@@ -23,9 +23,9 @@ def setup_database():
     """
     if os.path.exists(DB_PATH):
         os.remove(DB_PATH)
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute(
+    connection = sqlite3.connect(DB_PATH)
+    cursor = connection.cursor()
+    cursor.execute(
         """CREATE TABLE IF NOT EXISTS users
         (id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id TEXT,
@@ -33,9 +33,9 @@ def setup_database():
         domain TEXT,
         goto TEXT)"""
     )
-    conn.commit()
+    connection.commit()
     yield
-    conn.close()
+    connection.close()
     os.remove(DB_PATH)
 
 
