@@ -97,10 +97,9 @@ def get_all_users(db=DB_PATH):
     Returns:
         list: return list of tuples of all users
     """
-    sql = "SELECT * FROM users"
-    conn = sqlite3.connect(db)
-    c = conn.cursor()
-    c.execute(sql)
-    result = c.fetchall()
-    conn.close()
+    connection = sqlite3.connect(db)
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users")
+    result = cursor.fetchall()
+    connection.close()
     return result
