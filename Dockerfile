@@ -1,4 +1,12 @@
-FROM python:3.11-alpine
-ADD dist/tg_mailcow_aliases-0.1.1-py3-none-any.whl .
-RUN pip install tg_mailcow_aliases-0.1.1-py3-none-any.whl
+FROM python:3.11-slim AS builder
+RUN pip install poetry
+WORKDIR /app
+COPY pyproject.toml poetry.lock ./
+COPY tg_mailcow_aliases ./tg_mailcow_aliases
+RUN poetry build --format wheel
+
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=builder /app/dist/*.whl .
+RUN pip install *.whl && rm *.whl
 CMD ["start"]
