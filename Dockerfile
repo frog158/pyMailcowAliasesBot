@@ -1,7 +1,7 @@
 FROM python:3.11-slim AS builder
 RUN pip install poetry
 WORKDIR /app
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml poetry.lock README.md ./
 COPY tg_mailcow_aliases ./tg_mailcow_aliases
 RUN poetry build --format wheel
 
