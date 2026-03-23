@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "tg-mailcow-aliases"
+version = "0.1.1"
+description = "Bot for create aliases in mailcow."
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "tg_mailcow_aliases"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+aiogram = "^3.0.0"
+aiohttp-socks = "^0.11.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.14.0"
+pytest = "^7.4.0"
+pytest-mock = "^3.11.1"
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+start = "tg_mailcow_aliases.scripts.start:main"
+create_table = "tg_mailcow_aliases.scripts.create_table:main"
+add_user = "tg_mailcow_aliases.scripts.add_user:main"
+delete_user = "tg_mailcow_aliases.scripts.delete_user:main"
+is_user_exists = "tg_mailcow_aliases.scripts.is_user_exists:main"
+get_all_users = "tg_mailcow_aliases.scripts.get_all_users:main"
+
+[tool.black]
+line-length = 80

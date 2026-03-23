@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mailcow-aliases:
+    image: frog158/pymailcowaliasesbot
+    container_name: tg-mailcow-aliases
+    env_file:
+      - .env
+    restart: always
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+    volumes:
+      - ${PWD}:/data

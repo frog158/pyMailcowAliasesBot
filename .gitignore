@@ -1,0 +1,25 @@
+
+# Environment files (real credentials)
+.env*
+!.env.example
+!.env.fish.example
+
+# Local database files
+data/
+
+# Python cache
+__pycache__/
+.pytest_cache/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
